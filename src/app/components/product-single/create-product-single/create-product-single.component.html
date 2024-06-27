@@ -1,0 +1,50 @@
+<h1>Create Product Details</h1>
+<hr />
+<form [formGroup]="form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-12">
+        <input class="form-control mb-4" formControlName="title" type="text" placeholder="Enter title..." />
+      </div>
+      <div class="col-lg-5 col-12">
+        <input class="form-control" formControlName="description" type="text" placeholder="Enter Description..." />
+      </div>
+      <div class="col-lg-5 col-12">
+        <angular-editor [placeholder]="'Long Description here...'" formControlName="longDescription"></angular-editor>
+      </div>
+      <div class="col-lg-5 col-12">
+        <label> Add PDF</label>
+        <input class="form-control" (change)="onPdfFileSelect($event)" type="file" placeholder="Enter File..."
+          accept="application/pdf" />
+      </div>
+      <div formArrayName="image" class="mt-4 mb-4">
+        <div *ngFor="let img of image.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="mb-4 d-flex justify-content-between">
+              <div>
+                <input class="form-control mr-4" (change)="onFileSelect($event, i)" type="file"
+                  accept=".png, .jpg, .jpeg" />
+              </div>
+              <div>
+                <img [src]="img.value.imagePreview" [alt]="img.value.image" width="50" height="50" />
+              </div>
+              <button mat-raised-button color="warn" (click)="removeimage(i)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button mat-raised-button color="primary" (click)="addImage()">
+          Add Image
+        </button>
+      </div>
+      <div class="mt-4">
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!form.valid" type="submit">
+          Create Product Single
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

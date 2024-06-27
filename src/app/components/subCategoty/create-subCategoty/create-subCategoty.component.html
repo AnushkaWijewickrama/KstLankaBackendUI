@@ -1,0 +1,27 @@
+<h1>Create Or Edit Sub Categoty</h1>
+<hr />
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-12">
+        <input class="form-control" formControlName="title" type="text" placeholder="Enter Title..." />
+      </div>
+      <div class="col-lg-5 col-12">
+        <label for="">Brand</label>
+        <select formControlName="brand" multiple size="15" class="form-control">
+          <option>
+            none
+          </option>
+          <option *ngFor="let item of brandList" [value]="item">
+            {{ item?.code}}
+          </option>
+        </select>
+      </div>
+      <div class="mt-4">
+        <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
+          Create Sub Categoty
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

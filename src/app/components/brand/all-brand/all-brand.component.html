@@ -1,0 +1,30 @@
+<button mat-raised-button color="primary" routerLink="/addBrand">Add</button>
+<h1>Brand</h1>
+<p-table [value]="brand" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Code</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-brand>
+        <tr>
+            <td>{{ brand.code }}</td>
+            <td>{{ brand.title }}</td>
+            <td>{{ brand.description }}</td>
+            <td><img src="{{ brand.imagePath }}" width="100" height="100" alt="" srcset=""></td>
+            <td>
+                @for (item of brand.model; track item._id) {
+                <li>{{ item.title }}</li>
+                } @empty {
+                <li>There are no items.</li>
+                }
+            </td>
+            <td><button mat-raised-button color="primary" [routerLink]="['/editBrand',brand._id]">Edit</button></td>
+            <td><button mat-raised-button color="warn" (click)="deleteData(brand._id)">Delete</button></td>
+
+        </tr>
+    </ng-template>
+</p-table>

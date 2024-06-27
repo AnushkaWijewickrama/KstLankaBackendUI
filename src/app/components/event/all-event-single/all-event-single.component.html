@@ -1,0 +1,23 @@
+<button mat-raised-button color="primary" routerLink="/addEventSingle">Add</button>
+<h1>Events</h1>
+<p-table [value]="event" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-event>
+        <tr>
+            <td>{{ event.title }}</td>
+            <td>{{ event.description }}</td>
+            <td><img src="{{ event.imagePath[0] }}" width="100" height="100" alt="" srcset=""></td>
+
+            <td><button mat-raised-button color="primary" [routerLink]="['/editEventSingle',event._id]">Edit</button>
+            </td>
+            <td><button mat-raised-button color="warn" (click)="deleteData(event._id)">Delete</button></td>
+
+        </tr>
+    </ng-template>
+</p-table>

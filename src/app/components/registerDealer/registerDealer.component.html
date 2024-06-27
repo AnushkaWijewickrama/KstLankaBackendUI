@@ -1,0 +1,26 @@
+<h1>Change Register Dealer Application</h1>
+<hr />
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-12">
+        <input class="form-control mb-4" formControlName="title" type="text" placeholder="Enter title..." />
+      </div>
+      <div class="col-lg-5 col-12 mb-4">
+        <input class="form-control" (change)="onPdfFileSelect($event)" type="file" accept=".pdf" />
+      </div>
+      <div class="col-lg-5 col-12">
+        <label>Long Description here...</label>
+        <angular-editor [placeholder]="'Long Description here...'" formControlName="longDescription"></angular-editor>
+        <label *ngIf="!form.value.pdf">PDF Url : Please Fill PDF</label>
+        <span [innerHTML]="form.value.pdfLink"></span>
+
+      </div>
+    </div>
+    <div class="mt-4">
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!form.valid" type="submit">
+        Change Register Dealer Application
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<button mat-raised-button color="primary" routerLink="/addProduct">Add</button>
+<h1>Product</h1>
+<p-table [value]="product" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Sub Categoty</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.description }}</td>
+            <td><img src="{{ product.imagePath }}" width="100" height="100" alt="" srcset=""></td>
+            <td>
+                @for (item of product?.subcategories; track item._id) {
+                <li>{{ item.title }}</li>
+                } @empty {
+                <li>There are no items.</li>
+                }
+            </td>
+            <td><button mat-raised-button color="primary" [routerLink]="['/editProduct',product._id]">Edit</button></td>
+            <td><button mat-raised-button color="warn" (click)="deleteData(product._id)">Delete</button></td>
+
+        </tr>
+    </ng-template>
+</p-table>

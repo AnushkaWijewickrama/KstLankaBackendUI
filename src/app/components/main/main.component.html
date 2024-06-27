@@ -1,0 +1,66 @@
+<mat-toolbar class="mat-elevation-z8">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  K. S. Trading Lanka Private Limited
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <!-- <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" /> -->
+
+    <h4 class="name">Welcome User</h4>
+
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button" routerLink="/banner">
+      <mat-icon>info</mat-icon>
+      <span>Banner</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/product">
+      <mat-icon>home</mat-icon>
+      <span>Product</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/subCategoty">
+      <mat-icon>info</mat-icon>
+      <span>Sub Categoty</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/brand">
+      <mat-icon>info</mat-icon>
+      <span>Brand</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/model">
+      <mat-icon>info</mat-icon>
+      <span>Model</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/productSingle">
+      <mat-icon>info</mat-icon>
+      <span>Product Single</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/client">
+      <mat-icon>info</mat-icon>
+      <span>Client</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/registerDealer">
+      <mat-icon>info</mat-icon>
+      <span>Dealer Form</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/events">
+      <mat-icon>info</mat-icon>
+      <span>Events</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" *ngIf="isActiveUser" (click)="setLogOut()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- <app-auth></app-auth> -->

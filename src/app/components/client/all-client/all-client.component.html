@@ -1,0 +1,20 @@
+<button mat-raised-button color="primary" routerLink="/addclient">Add</button>
+<h1>Client</h1>
+<p-table [value]="client" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-client>
+        <tr>
+            <td>{{ client.title }}</td>
+            <td>{{ client.description }}</td>
+            <td><img src="{{ client.imagePath }}" width="100" height="100" alt="" srcset=""></td>
+            <td><button mat-raised-button color="warn" (click)="deleteData(client._id)">Delete</button></td>
+
+        </tr>
+    </ng-template>
+</p-table>

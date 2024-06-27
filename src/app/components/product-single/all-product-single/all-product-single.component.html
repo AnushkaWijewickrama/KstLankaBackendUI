@@ -1,0 +1,23 @@
+<button mat-raised-button color="primary" routerLink="/addProductSingle">Add</button>
+<h1>Product Single</h1>
+<p-table [value]="product" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.description }}</td>
+            <td><img src="{{ product.imagePath[0] }}" width="100" height="100" alt="" srcset=""></td>
+
+            <td><button mat-raised-button color="primary"
+                    [routerLink]="['/editProductSingle',product._id]">Edit</button></td>
+            <td><button mat-raised-button color="warn" (click)="deleteData(product._id)">Delete</button></td>
+
+        </tr>
+    </ng-template>
+</p-table>
