@@ -3,14 +3,14 @@
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  K. S. Trading Lanka Private Limited
+  <h6>K. S. Trading Lanka Private Limited</h6>
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <!-- <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" /> -->
 
-    <h4 class="name">Welcome User</h4>
+    <h6 class="name">Welcome User</h6>
 
     <mat-divider></mat-divider>
     <button mat-button class="menu-button" routerLink="/banner">
@@ -18,7 +18,7 @@
       <span>Banner</span>
     </button>
     <button mat-button class="menu-button" routerLink="/product">
-      <mat-icon>home</mat-icon>
+      <mat-icon>info</mat-icon>
       <span>Product</span>
     </button>
     <button mat-button class="menu-button" routerLink="/subCategoty">

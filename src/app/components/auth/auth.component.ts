@@ -25,7 +25,6 @@ export class AuthComponent implements OnInit {
       .subscribe((result) => {
         localStorage.setItem('authenticationToken', result?.body?.token)
         this.route.navigate(['/product']);
-        // location.reload();
 
       },
         (error) => {
