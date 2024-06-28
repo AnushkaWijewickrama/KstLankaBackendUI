@@ -3,5 +3,6 @@ export interface Model {
   title: string;
   description: string;
   imagePath: string,
-  brand:string
+  brand: string,
+  sortval: string
 }

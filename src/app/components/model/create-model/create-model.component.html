@@ -9,6 +9,11 @@
       <div class="col-lg-5 col-12">
         <input class="form-control" formControlName="description" type="text" placeholder="Enter Description..." />
       </div>
+      <div class="col-lg-5 col-12">
+        <label class="mb-2">Sort Value</label>
+        <input class="form-control mb-4" formControlName="sortval" type="number"
+          placeholder="Enter Integer Number... " />
+      </div>
       <div class="col-lg-5 col-12 mb-4">
         <input class="form-control" (change)="onFileSelect($event)" type="file" accept=".png, .jpg, .jpeg" />
         <div class="col-lg-5 col-12 mt-4">

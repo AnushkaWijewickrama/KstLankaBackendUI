@@ -35,7 +35,8 @@ export class CreateModelComponent implements OnInit {
       description: new FormControl(null, Validators.required),
       image: new FormControl(null, Validators.required),
       productdetails: new FormControl(null),
-      id: new FormControl(null)
+      id: new FormControl(null),
+      sortval: new FormControl(null)
     });
     this.getproductSingleList();
     this.activatedRoute.params.subscribe(data => {
@@ -47,10 +48,11 @@ export class CreateModelComponent implements OnInit {
             .subscribe((productDetailsList: Product[]) => {
               this.productDetailsList = productDetailsList;
               let x = res.body
-              this.form.get('title')?.patchValue(x.title)
-              this.form.get('description')?.patchValue(x.description)
-              this.form.get('image')?.patchValue(x.imagePath)
-              this.form.get('id')?.patchValue(x._id)
+              this.form.get('title')?.patchValue(x?.title)
+              this.form.get('description')?.patchValue(x?.description)
+              this.form.get('image')?.patchValue(x?.imagePath)
+              this.form.get('id')?.patchValue(x?._id)
+              this.form.get('sortval')?.patchValue(x?.sortval)
               const commonElements = productDetailsList.filter((a: any) => x.productdetails.some((b: any) => a._id === b._id));
               this.form.get('productdetails')?.patchValue(commonElements)
             });
@@ -78,12 +80,12 @@ export class CreateModelComponent implements OnInit {
 
   onSubmit() {
     if (!this.isedit) {
-      this.modelService.addModel(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.productdetails);
+      this.modelService.addModel(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.productdetails, this.form.value.sortval);
       this.form.reset();
       this.imageData = null;
     }
     else {
-      this.modelService.updateSingleData(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.productdetails, this.form.value.id);
+      this.modelService.updateSingleData(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.productdetails, this.form.value.id, this.form.value.sortval);
       this.form.reset();
       this.imageData = null;
     }

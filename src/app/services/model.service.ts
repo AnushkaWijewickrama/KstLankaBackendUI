@@ -38,11 +38,12 @@ export class ModelService {
     return this.model$.asObservable();
   }
 
-  addModel(title: string, image: File, description: string, productdetails: any): void {
+  addModel(title: string, image: File, description: string, productdetails: any, sortval: any): void {
     const modelData = new FormData();
     modelData.append("title", title);
     modelData.append("image", image);
     modelData.append("description", description);
+    modelData.append("sortval", sortval);
     modelData.append("productdetails", JSON.stringify(productdetails));
     this.http
       .post<{ profile: Model }>(this.modelUrl, modelData)
@@ -53,6 +54,7 @@ export class ModelService {
           description: modelData?.description,
           imagePath: modelData?.imagePath,
           brand: modelData?.brand,
+          sortval: modelData?.sortval
         };
         this.model.push(brand);
 
@@ -74,24 +76,26 @@ export class ModelService {
   getSingleData(id: string): Observable<HttpResponse<{}>> {
     return this.http.get(`${this.url}/singledata/${id}`, { observe: 'response' });
   }
-  updateSingleData(title: string, image: File, description: string, productdetails: any, id: string): void {
+  updateSingleData(title: string, image: File, description: string, productdetails: any, id: string, sortval: any): void {
     const modelData = new FormData();
     modelData.append("title", title);
     if (image) {
       modelData.append("image", image);
 
     }
+    modelData.append("sortval", sortval);
     modelData.append("description", description);
     modelData.append("productdetails", JSON.stringify(productdetails));
     this.http
       .put<{ model: Model }>(`${this.url}/update/${id}`, modelData)
-      .subscribe((brandData: any) => {
+      .subscribe((modelData: any) => {
         const model: Model = {
-          _id: brandData?._id,
-          title: brandData?.title,
-          description: brandData?.description,
-          imagePath: brandData?.imagePath,
-          brand: brandData?.brand,
+          _id: modelData?._id,
+          title: modelData?.title,
+          description: modelData?.description,
+          imagePath: modelData?.imagePath,
+          brand: modelData?.brand,
+          sortval: modelData?.brand
         };
         this.model.push(model);
 
