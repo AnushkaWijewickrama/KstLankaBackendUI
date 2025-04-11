@@ -54,6 +54,8 @@ export class BrandService {
           description: brandData?.description,
           imagePath: brandData?.imagePath,
           brand: brandData?.brand,
+          code: brandData?.code,
+          model: brandData.model
         };
         this.brand.push(brand);
 
@@ -86,7 +88,9 @@ export class BrandService {
           title: brandData?.title,
           description: brandData?.description,
           imagePath: brandData?.imagePath,
+          code: brandData?.code,
           brand: brandData?.brand,
+          model: brandData.model
         };
         this.brand.push(brand);
 

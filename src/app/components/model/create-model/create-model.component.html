@@ -1,41 +1,61 @@
-<h1>Create Model</h1>
-<hr />
-<form [formGroup]="form" (submit)="onSubmit()">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-5 col-12">
-        <input class="form-control mb-4" formControlName="title" type="text" placeholder="Enter title..." />
-      </div>
-      <div class="col-lg-5 col-12">
-        <input class="form-control" formControlName="description" type="text" placeholder="Enter Description..." />
-      </div>
-      <div class="col-lg-5 col-12">
-        <label class="mb-2">Sort Value</label>
-        <input class="form-control mb-4" formControlName="sortval" type="number"
-          placeholder="Enter Integer Number... " />
-      </div>
-      <div class="col-lg-5 col-12 mb-4">
-        <input class="form-control" (change)="onFileSelect($event)" type="file" accept=".png, .jpg, .jpeg" />
-        <div class="col-lg-5 col-12 mt-4">
-          <img [src]="imageData || form.get('image')?.value" [alt]="form.value.name" width="200" height="200" />
-        </div>
-      </div>
+<h1 class="text-2xl font-bold mb-4">Create Model</h1>
+<hr class="mb-6" />
 
-      <div class="col-lg-5 col-12">
-        <select formControlName="productdetails" multiple size="15" class="form-control">
-          <option>
-            none
-          </option>
-          <option *ngFor="let item of productDetailsList" [value]="item">
-            {{ item.title }}
-          </option>
-        </select>
-      </div>
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="flex flex-wrap gap-6">
+
+    <!-- Title Input -->
+    <div class="w-full lg:w-5/12">
+      <input
+        class="w-full p-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="title" type="text" placeholder="Enter title..." />
+    </div>
+
+    <!-- Description Input -->
+    <div class="w-full lg:w-5/12">
+      <input
+        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="description" type="text" placeholder="Enter Description..." />
+    </div>
+
+    <!-- Sort Value -->
+    <div class="w-full lg:w-5/12">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Sort Value</label>
+      <input
+        class="w-full p-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="sortval" type="number" placeholder="Enter Integer Number..." />
+    </div>
+
+    <!-- File Upload -->
+    <div class="w-full lg:w-5/12 mb-4">
+      <input
+        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        (change)="onFileSelect($event)" type="file" accept=".png, .jpg, .jpeg" />
       <div class="mt-4">
-        <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
-          Create Model
-        </button>
+        <img [src]="imageData || form.get('image')?.value" [alt]="form.value.name"
+          class="w-[200px] h-[200px] object-contain border border-gray-300 rounded-md" />
       </div>
     </div>
+
+    <!-- Product Details Select -->
+    <div class="w-full lg:w-5/12">
+      <select formControlName="productdetails" multiple size="15"
+        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200">
+        <option>none</option>
+        <option *ngFor="let item of productDetailsList" [value]="item">
+          {{ item.title }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="w-full mt-4">
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="!form.valid" type="submit">
+        Create Model
+      </button>
+    </div>
+
   </div>
 </form>

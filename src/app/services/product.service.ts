@@ -52,6 +52,7 @@ export class ProductService {
           imagePath: productData?.imagePath,
           brand: productData?.brand,
           model: productData?.model,
+          subcategories: productData?.subcategories
         };
         this.route.navigate(['/product'])
         this.products.push(product);
@@ -92,7 +93,8 @@ export class ProductService {
           description: product?.description,
           imagePath: product?.imagePath,
           brand: product?.brand,
-          model: product?.model
+          model: product?.model,
+          subcategories: product?.subcategories
         };
         this.products.push(model);
 

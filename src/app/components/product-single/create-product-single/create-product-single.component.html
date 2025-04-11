@@ -1,50 +1,74 @@
-<h1>Create Product Details</h1>
-<hr />
+<h1 class="text-2xl font-bold mb-4">Create Product Details</h1>
+<hr class="mb-6" />
+
 <form [formGroup]="form">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-5 col-12">
-        <input class="form-control mb-4" formControlName="title" type="text" placeholder="Enter title..." />
-      </div>
-      <div class="col-lg-5 col-12">
-        <input class="form-control" formControlName="description" type="text" placeholder="Enter Description..." />
-      </div>
-      <div class="col-lg-5 col-12">
-        <angular-editor [placeholder]="'Long Description here...'" formControlName="longDescription"></angular-editor>
-      </div>
-      <div class="col-lg-5 col-12">
-        <label> Add PDF</label>
-        <input class="form-control" (change)="onPdfFileSelect($event)" type="file" placeholder="Enter File..."
-          accept="application/pdf" />
-      </div>
-      <div formArrayName="image" class="mt-4 mb-4">
-        <div *ngFor="let img of image.controls; let i = index">
-          <div [formGroupName]="i">
-            <div class="mb-4 d-flex justify-content-between">
-              <div>
-                <input class="form-control mr-4" (change)="onFileSelect($event, i)" type="file"
-                  accept=".png, .jpg, .jpeg" />
-              </div>
-              <div>
-                <img [src]="img.value.imagePreview" [alt]="img.value.image" width="50" height="50" />
-              </div>
-              <button mat-raised-button color="warn" (click)="removeimage(i)">
-                Remove
-              </button>
-            </div>
-          </div>
+  <div class="flex flex-wrap gap-6">
+
+    <!-- Title -->
+    <div class="w-full lg:w-5/12">
+      <input
+        class="w-full p-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="title" type="text" placeholder="Enter title..." />
+    </div>
+
+    <!-- Description -->
+    <div class="w-full lg:w-5/12">
+      <input
+        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="description" type="text" placeholder="Enter Description..." />
+    </div>
+
+    <!-- Long Description (Angular Editor placeholder container) -->
+    <div class="w-full lg:w-5/12">
+      <label class="block text-sm text-gray-700 mb-1">Long Description</label>
+      <angular-editor class="border border-gray-300 rounded-md p-2" [placeholder]="'Long Description here...'"
+        formControlName="longDescription"></angular-editor>
+    </div>
+
+    <!-- PDF Upload -->
+    <div class="w-full lg:w-5/12">
+      <label class="block text-sm text-gray-700 mb-1">Add PDF</label>
+      <input
+        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        (change)="onPdfFileSelect($event)" type="file" accept="application/pdf" />
+    </div>
+
+    <!-- Image Uploads -->
+    <div formArrayName="image" class="w-full mt-4 mb-4">
+      <div *ngFor="let img of image.controls; let i = index" [formGroupName]="i">
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+          <!-- File Input -->
+          <input
+            class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+            (change)="onFileSelect($event, i)" type="file" accept=".png, .jpg, .jpeg" />
+          <!-- Preview -->
+          <img [src]="img.value.imagePreview" [alt]="img.value.image"
+            class="w-[50px] h-[50px] object-cover border border-gray-300 rounded" />
+          <!-- Remove Button -->
+          <button class="bg-red-600 text-white px-3 py-1 rounded-md shadow hover:bg-red-700" type="button"
+            (click)="removeimage(i)">
+            Remove
+          </button>
         </div>
       </div>
-      <div class="mt-4">
-        <button mat-raised-button color="primary" (click)="addImage()">
-          Add Image
-        </button>
-      </div>
-      <div class="mt-4">
-        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!form.valid" type="submit">
-          Create Product Single
-        </button>
-      </div>
     </div>
+
+    <!-- Add Image Button -->
+    <div class="w-full mt-4">
+      <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-700"
+        (click)="addImage()">
+        Add Image
+      </button>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="w-full mt-4">
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        type="submit" (click)="onSubmit()" [disabled]="!form.valid">
+        Create Product Single
+      </button>
+    </div>
+
   </div>
 </form>

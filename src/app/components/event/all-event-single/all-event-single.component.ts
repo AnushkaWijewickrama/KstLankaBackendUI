@@ -8,16 +8,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from "@angular/router";
 import { EventSingleService } from "../../../services/event.service";
 import { Events } from "../../../models/event";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-event",
   templateUrl: "./all-event-single.component.html",
   styleUrls: ["./all-event-single.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxPaginationModule, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
 })
 export class AlleventSingleComponent implements OnInit, OnDestroy {
-  event: Events[] = [];
+  eventList: Events[] = [];
   private eventSubscription!: Subscription;
+  page: number = 1;
 
   constructor(private eventService: EventSingleService) { }
 
@@ -26,7 +28,7 @@ export class AlleventSingleComponent implements OnInit, OnDestroy {
     this.eventSubscription = this.eventService
       .geteventStream()
       .subscribe((event: any[]) => {
-        this.event = event;
+        this.eventList = event;
       });
   }
 

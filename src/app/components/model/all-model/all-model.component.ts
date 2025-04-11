@@ -10,16 +10,18 @@ import { Product } from "../../../models/product";
 import { ProductService } from "../../../services/product.service";
 import { ModelService } from "../../../services/model.service";
 import { Model } from "../../../models/model";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-model",
   templateUrl: "./all-model.component.html",
   styleUrls: ["./all-model.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink, NgxPaginationModule]
 })
 export class AllModelComponent implements OnInit, OnDestroy {
-  model: Model[] = [];
+  modelList: Model[] = [];
   private modelSubscription!: Subscription;
+  page: number = 1;
 
   constructor(private modelService: ModelService) { }
 
@@ -28,7 +30,7 @@ export class AllModelComponent implements OnInit, OnDestroy {
     this.modelSubscription = this.modelService
       .getModelStream()
       .subscribe((product: Model[]) => {
-        this.model = product;
+        this.modelList = product;
       });
   }
 

@@ -8,16 +8,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from "@angular/router";
 import { Brand } from "../../../models/brand";
 import { BrandService } from "../../../services/brand.service";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-brand",
   templateUrl: "./all-brand.component.html",
   styleUrls: ["./all-brand.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink, NgxPaginationModule]
 })
 export class AllBrandComponent implements OnInit, OnDestroy {
-  brand: Brand[] = [];
+  brandList: Brand[] = [];
   private bannerSubscription!: Subscription;
+  page: number = 1;
 
   constructor(private brandService: BrandService) { }
 
@@ -26,7 +28,7 @@ export class AllBrandComponent implements OnInit, OnDestroy {
     this.bannerSubscription = this.brandService
       .getBrandStream()
       .subscribe((brand: Brand[]) => {
-        this.brand = brand;
+        this.brandList = brand;
       });
   }
 

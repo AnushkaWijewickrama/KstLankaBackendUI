@@ -47,6 +47,9 @@ export class SubCategotyService {
       .subscribe((brandData: any) => {
         const subCategoty: subCategoty = {
           brand: brandData?.brand,
+          title: brandData?.title,
+          _id: brandData._id,
+          code: brandData.code
         };
         this.subCategoty.push(subCategoty);
 
@@ -79,6 +82,11 @@ export class SubCategotyService {
       .subscribe((brandData: any) => {
         const subCategoty: subCategoty = {
           brand: brandData?.brand,
+          title: brandData?.title,
+          _id: brandData._id,
+          code: brandData.code
+
+
         };
         this.subCategoty.push(subCategoty);
 

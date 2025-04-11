@@ -4,41 +4,43 @@ import { CommonModule, NgFor, NgIf } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { TableModule } from 'primeng/table';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from "@angular/router";
 import { Product } from "../../../models/product";
 import { ProductService } from "../../../services/product.service";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-product",
   templateUrl: "./all-product.component.html",
   styleUrls: ["./all-product.component.css"],
-  standalone:true,
-  imports:[CommonModule,ReactiveFormsModule,FormsModule,NgIf,NgFor,HttpClientModule,TableModule,MatButtonModule,RouterLink]
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink, NgxPaginationModule]
 })
 export class AllProductComponent implements OnInit, OnDestroy {
-  product: Product[] = [];
+  productList: Product[] = [];
+  page: number = 1;
   private productSubscription!: Subscription;
 
-  constructor(private productService:ProductService) {}
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.productService.getProduct();
     this.productSubscription = this.productService
       .getProductStream()
       .subscribe((product: Product[]) => {
-        this.product = product;
+        this.productList = product;
       });
   }
 
   ngOnDestroy() {
     this.productSubscription.unsubscribe();
   }
-  deleteData (id:string) : void {
+  deleteData(id: string): void {
     if (confirm("Do you want to save the changes?") == true) {
-      this.productService.delete(id).subscribe(res=>{
+      this.productService.delete(id).subscribe(res => {
         this.productService.getProduct();
-       }) 
-      }
+      })
     }
-
   }
+
+}

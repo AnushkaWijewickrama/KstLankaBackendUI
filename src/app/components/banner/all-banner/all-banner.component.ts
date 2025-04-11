@@ -8,16 +8,18 @@ import { HttpClientModule } from "@angular/common/http";
 import { TableModule } from 'primeng/table';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from "@angular/router";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-banner",
   templateUrl: "./all-banner.component.html",
   styleUrls: ["./all-banner.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink, NgxPaginationModule]
 })
 export class AllBannerComponent implements OnInit, OnDestroy {
-  banner: Banner[] = [];
+  bannerList: Banner[] = [];
   private bannerSubscription!: Subscription;
+  page: number = 1;
 
   constructor(private bannersService: BannerService) { }
 
@@ -26,7 +28,7 @@ export class AllBannerComponent implements OnInit, OnDestroy {
     this.bannerSubscription = this.bannersService
       .getBannerStream()
       .subscribe((banner: Banner[]) => {
-        this.banner = banner;
+        this.bannerList = banner;
       });
   }
 

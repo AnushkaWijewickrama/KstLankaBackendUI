@@ -1,33 +1,30 @@
-<div class="wrapper">
-  <div class="rec-prism">
-    <div class="face face-front">
-      <div class="content">
-        <h2>Sign in</h2>
-        <form [formGroup]="form">
-          <div class="field-wrapper">
-            <input
-              type="text"
-              name="username"
-              formControlName="username"
-              placeholder="username"
-              form
-            />
-            <label>username</label>
-          </div>
-          <div class="field-wrapper">
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              autocomplete="new-password"
-              formControlName="password"
-            />
-            <label>password</label>
-          </div>
-          <div class="field-wrapper">
-            <input type="submit" (click)="onSubmit()" />
-          </div>
-        </form>
+<div class="flex justify-center items-center min-h-screen">
+  <div class="w-64 h-96 perspective">
+    <div
+      class="relative w-full h-full transform-style-3d transform translate-z-[-100px] transition-transform duration-500 ease-in">
+      <div class="absolute w-64 h-96 p-5 bg-white border-4 border-blue-700 rounded-md shadow-lg">
+        <div class="text-gray-700">
+          <h2 class="text-xl font-semibold text-blue-700">Sign in</h2>
+          <form [formGroup]="form" class="mt-6 space-y-6">
+            <!-- Username Field -->
+            <div class="relative">
+              <input type="text" name="username" formControlName="username" placeholder="Username"
+                class="w-full border-b-2 border-teal-500 bg-transparent text-gray-700 focus:outline-none focus:border-blue-600" />
+            </div>
+            <!-- Password Field -->
+            <div class="relative">
+              <input type="password" name="password" formControlName="password" placeholder="Password"
+                class="w-full border-b-2 border-teal-500 bg-transparent text-gray-700 focus:outline-none focus:border-blue-600" />
+            </div>
+            <!-- Submit Button -->
+            <div>
+              <button (click)="onSubmit()" [disabled]="!form.valid"
+                class="w-full bg-blue-700 text-white py-2 rounded-md hover:bg-blue-800 active:scale-95 transition-all duration-200">
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

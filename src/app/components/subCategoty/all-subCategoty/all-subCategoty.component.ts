@@ -8,16 +8,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from "@angular/router";
 import { subCategoty } from "../../../models/subCategoty";
 import { SubCategotyService } from "../../../services/subCategoty.service";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-model",
   templateUrl: "./all-subCategoty.component.html",
   styleUrls: ["./all-subCategoty.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink, NgxPaginationModule]
 })
 export class AllsubCategotyComponent implements OnInit, OnDestroy {
-  subCategoty: subCategoty[] = [];
+  subCategotyList: subCategoty[] = [];
   private subCategotySubscription!: Subscription;
+  page: number = 1;
 
   constructor(private subCategotyService: SubCategotyService) { }
 
@@ -26,7 +28,7 @@ export class AllsubCategotyComponent implements OnInit, OnDestroy {
     this.subCategotySubscription = this.subCategotyService
       .getsubCategotyStream()
       .subscribe((subCategoty: subCategoty[]) => {
-        this.subCategoty = subCategoty;
+        this.subCategotyList = subCategoty;
       });
   }
 

@@ -8,15 +8,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from "@angular/router";
 import { ClientService } from "../../../services/client.service";
 import { Client } from "../../../models/client";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-client",
   templateUrl: "./all-client.component.html",
   styleUrls: ["./all-client.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxPaginationModule, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
 })
 export class AllClientComponent implements OnInit, OnDestroy {
-  client: Client[] = [];
+  clientList: Client[] = [];
+  page: number = 1;
   private clientSubscription!: Subscription;
 
   constructor(private clientService: ClientService) { }
@@ -26,8 +28,7 @@ export class AllClientComponent implements OnInit, OnDestroy {
     this.clientSubscription = this.clientService
       .getBannerStream()
       .subscribe((client) => {
-        this.client = client;
-        console.log(client)
+        this.clientList = client;
       });
   }
 

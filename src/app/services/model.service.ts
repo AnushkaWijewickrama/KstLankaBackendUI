@@ -54,6 +54,7 @@ export class ModelService {
           description: modelData?.description,
           imagePath: modelData?.imagePath,
           brand: modelData?.brand,
+          productdetails: modelData.productdetails,
           sortval: modelData?.sortval
         };
         this.model.push(brand);
@@ -95,7 +96,8 @@ export class ModelService {
           description: modelData?.description,
           imagePath: modelData?.imagePath,
           brand: modelData?.brand,
-          sortval: modelData?.brand
+          sortval: modelData?.brand,
+          productdetails: modelData.productdetails
         };
         this.model.push(model);
 

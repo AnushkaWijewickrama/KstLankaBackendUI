@@ -9,16 +9,18 @@ import { RouterLink } from "@angular/router";
 import { Product } from "../../../models/product";
 import { ProductService } from "../../../services/product.service";
 import { ProductSingleService } from "../../../services/productsingle.service";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-create-product",
   templateUrl: "./all-product-single.component.html",
   styleUrls: ["./all-product-single.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxPaginationModule, NgFor, HttpClientModule, TableModule, MatButtonModule, RouterLink]
 })
 export class AllProductSingleComponent implements OnInit, OnDestroy {
-  product: Product[] = [];
+  productDetailsList: Product[] = [];
   private productSubscription!: Subscription;
+  page: number = 1;
 
   constructor(private productService: ProductSingleService) { }
 
@@ -27,7 +29,7 @@ export class AllProductSingleComponent implements OnInit, OnDestroy {
     this.productSubscription = this.productService
       .getProductStream()
       .subscribe((product: Product[]) => {
-        this.product = product;
+        this.productDetailsList = product;
       });
   }
 

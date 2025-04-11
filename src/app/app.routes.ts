@@ -20,6 +20,7 @@ import { AllsubCategotyComponent } from './components/subCategoty/all-subCategot
 import { EditSubCategotyComponent } from './components/subCategoty/create-subCategoty/create-subCategoty.component';
 import { AlleventSingleComponent } from './components/event/all-event-single/all-event-single.component';
 import { EventComponent } from './components/event/create-event-single/create-event-single.component';
+import { LoginGuard } from './util/loginguard.guard';
 
 export const routes: Routes = [
     {
@@ -29,10 +30,16 @@ export const routes: Routes = [
 
     },
     {
+        path: '',
+        redirectTo: '/product',
+        pathMatch: 'full'
+    },
+    {
         path: 'product',
         component: AllProductComponent,
         canActivate: [AuthGuardService]
     },
+
     {
         path: 'client',
         component: AllClientComponent,
@@ -134,8 +141,9 @@ export const routes: Routes = [
     },
 
     {
-        path: '',
-        component: AuthComponent
+        path: 'login',
+        component: AuthComponent,
+        canActivate: [LoginGuard]
 
 
     },

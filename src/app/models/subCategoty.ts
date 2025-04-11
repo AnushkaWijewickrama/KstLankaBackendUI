@@ -1,3 +1,8 @@
+import { Brand } from "./brand";
+
 export interface subCategoty {
-  brand: string
+  brand: Brand[],
+  title: string,
+  _id: string,
+  code: string
 }

@@ -1,44 +1,59 @@
-<h1>Create Banner</h1>
-<hr />
+<h1 class="text-2xl font-bold mb-4">Create Banner</h1>
+<hr class="mb-6" />
+
 <form [formGroup]="form" (submit)="onSubmit()">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-5 col-12">
-        <input class="form-control mb-4" formControlName="title" type="text" placeholder="Enter title..." />
-      </div>
-      <div class="col-lg-5 col-12">
-        <input class="form-control" formControlName="description" type="text" placeholder="Enter Description..." />
-      </div>
-      <div class="col-lg-5 col-12 mb-4" *ngIf="!form.value.isVideo">
-        <input class=" form-control" (change)="onFileSelect($event)" type="file" />
-        <div *ngIf="imageData" class="col-lg-5 col-12 mt-4">
-          <img [src]="imageData" [alt]="form.value.name" width="200" height="200" />
-        </div>
-      </div>
-      <div class="col-lg-5 col-12 mb-4">
-        <div class="d-flex " style="align-items: center;">
-          <label style="margin-right: 10px;">Is Video</label>
-          <input formControlName="isVideo" type="checkbox" />
+  <div class="flex flex-wrap gap-6">
 
-        </div>
+    <!-- Title -->
+    <div class="w-full lg:w-5/12">
+      <input
+        class="w-full p-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="title" type="text" placeholder="Enter title..." />
+    </div>
 
-      </div>
-      <div class="col-lg-5 col-12" *ngIf="form.value.isVideo">
-        <input class="form-control mb-4" formControlName="videoPath" type="text"
-          placeholder="Enter Youtube Video link..." />
-        <label>example : https://www.youtube.com/embed/sMwPj3mSgVk?autoplay=1&mute=1&si=TpfIHWg48KrW_QJn</label>
-      </div>
+    <!-- Description -->
+    <div class="w-full lg:w-5/12">
+      <input
+        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="description" type="text" placeholder="Enter Description..." />
+    </div>
 
-
-      <!-- <div class="col-lg-5 col-12">
-        <select formControlName="brand" multiple class="form-control">
-          <option *ngFor="let item of brandList" [value]="item">{{item.title}}</option>
-        </select>
-      </div> -->
-      <div class="mt-4">
-        <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">Create Banner</button>
+    <!-- Image Upload (if not video) -->
+    <div class="w-full lg:w-5/12 mb-4" *ngIf="!form.value.isVideo">
+      <input
+        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        (change)="onFileSelect($event)" type="file" />
+      <div *ngIf="imageData" class="mt-4">
+        <img [src]="imageData" [alt]="form.value.name"
+          class="w-[200px] h-[200px] object-contain border border-gray-300 rounded-md" />
       </div>
     </div>
 
+    <!-- Is Video Checkbox -->
+    <div class="w-full lg:w-5/12 mb-4">
+      <div class="flex items-center space-x-2">
+        <label class="text-sm font-medium text-gray-700">Is Video</label>
+        <input formControlName="isVideo" type="checkbox" class="w-4 h-4" />
+      </div>
+    </div>
+
+    <!-- Video URL (if isVideo) -->
+    <div class="w-full lg:w-5/12" *ngIf="form.value.isVideo">
+      <input
+        class="w-full p-2 mb-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+        formControlName="videoPath" type="text" placeholder="Enter Youtube Video link..." />
+      <label class="block text-xs text-gray-500">
+        example: https://www.youtube.com/embed/sMwPj3mSgVk?autoplay=1&mute=1&si=TpfIHWg48KrW_QJn
+      </label>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="w-full mt-4">
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="!form.valid" type="submit">
+        Create Banner
+      </button>
+    </div>
   </div>
 </form>
