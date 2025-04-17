@@ -26,12 +26,11 @@ export class CreateBannerComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      image: new FormControl(null),
+      image: new FormControl('/assets/img/imgepre.jpg'),
       brand: new FormControl(null),
       isVideo: new FormControl(null),
       videoPath: new FormControl(null)
     });
-    this.getBrand();
   }
 
   onFileSelect(event: any) {
@@ -48,14 +47,7 @@ export class CreateBannerComponent implements OnInit {
   }
 
   onSubmit() {
-    this.profileService.addBanner(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.isVideo, this.form.value.videoPath);
-    this.form.reset();
-    this.imageData = null;
+    this.profileService.addBanner(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.isVideo, this.form.value.videoPath, this.form);
 
-  }
-  getBrand(): void {
-    this.profileService.query().subscribe(res => {
-      this.brandList = res.body.brand
-    })
   }
 }

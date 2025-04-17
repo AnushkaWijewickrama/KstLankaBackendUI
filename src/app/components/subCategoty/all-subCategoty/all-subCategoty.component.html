@@ -21,8 +21,8 @@
                 <td class="px-4 py-2">{{ subCategoty.title }}</td>
                 <td class="px-4 py-2">
                     <ul>
-                        <li *ngFor="let item of subCategoty.brand">{{ item?.code }}</li>
-                        <li *ngIf="subCategoty.brand.length === 0">There are no items.</li>
+                        <li *ngFor="let item of subCategoty?.brand">{{ item?.code }}</li>
+                        <li *ngIf="subCategoty?.brand?.length === 0">There are no items.</li>
                     </ul>
                 </td>
                 <td class="px-4 py-2 space-x-2">

@@ -6,6 +6,7 @@ import { SERVER_API_URL } from "../util/common-util";
 import { createRequestOption } from "../util/request-util";
 import { Banner } from "../models/banner";
 import { Router } from "@angular/router";
+import { FormGroup } from "@angular/forms";
 
 @Injectable({
   providedIn: "root",
@@ -37,7 +38,7 @@ export class BannerService {
     return this.banners$.asObservable();
   }
 
-  addBanner(title: string, image: File, description: string, isVideo: string, videoPath: string): void {
+  addBanner(title: string, image: File, description: string, isVideo: string, videoPath: string, form: FormGroup): void {
     const bannerData = new FormData();
     bannerData.append("title", title);
     bannerData.append("image", image);
@@ -57,6 +58,7 @@ export class BannerService {
         this.banners.push(banner);
 
         this.banners$.next(this.banners);
+        form.reset()
         this.route.navigate(['/banner'])
       });
   }

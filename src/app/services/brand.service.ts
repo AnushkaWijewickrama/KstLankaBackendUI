@@ -6,6 +6,7 @@ import { SERVER_API_URL } from "../util/common-util";
 import { createRequestOption } from "../util/request-util";
 import { Brand } from "../models/brand";
 import { Router } from "@angular/router";
+import { FormGroup } from "@angular/forms";
 
 
 @Injectable({
@@ -38,7 +39,7 @@ export class BrandService {
     return this.brand$.asObservable();
   }
 
-  addBrand(title: string, image: File, description: string, model: any, code: string): void {
+  addBrand(title: string, image: File, description: string, model: any, code: string, form: FormGroup): void {
     const bannerData = new FormData();
     bannerData.append("title", title);
     bannerData.append("image", image);
@@ -61,6 +62,7 @@ export class BrandService {
 
         this.brand$.next(this.brand);
         this.router.navigate(['/brand'])
+        form.reset();
 
       });
   }
@@ -70,7 +72,7 @@ export class BrandService {
   getSingleData(id: string): Observable<HttpResponse<{}>> {
     return this.http.get(`${this.url}/singledata/${id}`, { observe: 'response' });
   }
-  updateSingleData(title: string, image: File, description: string, model: any, id: string, code: string): void {
+  updateSingleData(title: string, image: File, description: string, model: any, id: string, code: string, form: FormGroup): void {
     const bannerData = new FormData();
     bannerData.append("title", title);
     bannerData.append("code", code);
@@ -96,6 +98,8 @@ export class BrandService {
 
         this.brand$.next(this.brand);
         this.router.navigate(['/brand'])
+        form.reset();
+
 
       });
   }

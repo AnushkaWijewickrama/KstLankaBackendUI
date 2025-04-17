@@ -6,6 +6,7 @@ import { SERVER_API_URL } from "../util/common-util";
 import { createRequestOption } from "../util/request-util";
 import { Router } from "@angular/router";
 import { subCategoty } from "../models/subCategoty";
+import { FormGroup } from "@angular/forms";
 
 
 @Injectable({
@@ -37,7 +38,7 @@ export class SubCategotyService {
     return this.subCategoty$.asObservable();
   }
   // this.form.value.brand, this.form.value.id, this.form.value.title
-  addsubCategoty(brand: string, title: string): void {
+  addsubCategoty(brand: string, title: string, form: FormGroup): void {
     const subCategotyData: any = {};
     subCategotyData['brand'] = JSON.stringify(brand);
     subCategotyData['title'] = title;
@@ -54,6 +55,7 @@ export class SubCategotyService {
         this.subCategoty.push(subCategoty);
 
         this.subCategoty$.next(this.subCategoty);
+        form.reset()
         this.router.navigate(['/subCategoty'])
 
       });
@@ -72,7 +74,7 @@ export class SubCategotyService {
   getSingleData(id: string): Observable<HttpResponse<{}>> {
     return this.http.get(`${this.url}/singledata/${id}`, { observe: 'response' });
   }
-  updateSingleData(brand: any, id: string, title: string): void {
+  updateSingleData(brand: any, id: string, title: string, form: FormGroup): void {
     const subCategotyData: any = {};
     subCategotyData['brand'] = JSON.stringify(brand);
     subCategotyData['title'] = title;
@@ -91,6 +93,7 @@ export class SubCategotyService {
         this.subCategoty.push(subCategoty);
 
         this.subCategoty$.next(this.subCategoty);
+        form.reset()
         this.router.navigate(['/subCategoty'])
 
       });

@@ -50,7 +50,7 @@ export class EditSubCategotyComponent implements OnInit {
               this.form.get('title')?.patchValue(x?.title)
               this.form.get('id')?.patchValue(x?._id)
               this.form.get('code')?.patchValue(x?.code)
-              const commonElements = brand.filter((a: any) => x.brand.some((b: any) => a._id === b._id));
+              const commonElements = brand?.filter((a: any) => x.brand?.some((b: any) => a._id === b._id));
               this.form.get('brand')?.patchValue(commonElements)
             });
 
@@ -76,14 +76,10 @@ export class EditSubCategotyComponent implements OnInit {
 
   onSubmit() {
     if (!this.isedit) {
-      this.subCategotyService.addsubCategoty(this.form.value.brand, this.form.value.title);
-      this.form.reset();
-      this.imageData = null;
+      this.subCategotyService.addsubCategoty(this.form.value.brand, this.form.value.title, this.form);
     }
     else {
-      this.subCategotyService.updateSingleData(this.form.value.brand, this.form.value.id, this.form.value.title);
-      this.form.reset();
-      this.imageData = null;
+      this.subCategotyService.updateSingleData(this.form.value.brand, this.form.value.id, this.form.value.title, this.form);
     }
 
   }

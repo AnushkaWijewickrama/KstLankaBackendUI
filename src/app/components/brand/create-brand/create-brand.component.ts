@@ -31,7 +31,7 @@ export class CreateBrandComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      image: new FormControl(null, Validators.required),
+      image: new FormControl('/assets/img/imgepre.jpg', Validators.required),
       model: new FormControl(null),
       id: new FormControl(null),
       code: new FormControl(null),
@@ -51,9 +51,10 @@ export class CreateBrandComponent implements OnInit {
               this.form.get('description')?.patchValue(x.description)
               this.form.get('code')?.patchValue(x.code)
               this.form.get('image')?.patchValue(x.imagePath)
-              const commonElements = model.filter((a: any) => x.model.some((b: any) => a._id === b._id));
+              const commonElements = model?.filter((a: any) => x.model?.some((b: any) => a._id === b._id));
               this.form.get('model')?.patchValue(commonElements)
               this.form.get('id')?.patchValue(x._id)
+
             });
 
         })
@@ -77,15 +78,10 @@ export class CreateBrandComponent implements OnInit {
 
   onSubmit() {
     if (!this.isedit) {
-      id: new FormControl(null),
-        this.brandService.addBrand(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.model, this.form.value.code);
-      this.form.reset();
-      this.imageData = null;
+      this.brandService.addBrand(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.model, this.form.value.code, this.form);
     }
     else {
-      this.brandService.updateSingleData(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.model, this.form.value.id, this.form.value.code);
-      this.form.reset();
-      this.imageData = null;
+      this.brandService.updateSingleData(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.model, this.form.value.id, this.form.value.code, this.form);
     }
 
 

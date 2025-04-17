@@ -8,6 +8,7 @@ import { DealerService } from "../../services/dealer.service";
 import { NgxExtendedPdfViewerModule } from "ngx-extended-pdf-viewer";
 import { AngularEditorModule } from "@kolkov/angular-editor";
 import { SERVER_API_URL } from "../../util/common-util";
+import { PdfThumbnailComponent } from "../pdf-thumbnail/pdf-thumbnail.component";
 
 
 @Component({
@@ -15,7 +16,7 @@ import { SERVER_API_URL } from "../../util/common-util";
   templateUrl: "./registerDealer.component.html",
   styleUrls: ["./registerDealer.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, MatButtonModule, NgxExtendedPdfViewerModule, AngularEditorModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, MatButtonModule, NgxExtendedPdfViewerModule, AngularEditorModule, PdfThumbnailComponent, NgIf]
 })
 export class CreateregisterDealerComponent implements OnInit {
   form!: FormGroup;

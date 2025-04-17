@@ -8,11 +8,14 @@
           class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
           formControlName="title" type="text" placeholder="Enter title..." />
       </div>
-
       <div class="w-full lg:w-5/12">
         <input
           class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
           (change)="onPdfFileSelect($event)" type="file" accept=".pdf" />
+        <div *ngIf="form.value.pdf">
+          <app-pdf-thumbnail [pdfUrl]="form.value.pdf"></app-pdf-thumbnail>
+
+        </div>
       </div>
 
       <div class="w-full lg:w-5/12 space-y-2">

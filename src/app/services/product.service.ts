@@ -36,7 +36,7 @@ export class ProductService {
     return this.product$.asObservable();
   }
 
-  addProduct(title: string, image: File, description: string, subcategories: any): void {
+  addProduct(title: string, image: File, description: string, subcategories: any, form: any): void {
     const productData = new FormData();
     productData.append("title", title);
     productData.append("image", image);
@@ -58,6 +58,7 @@ export class ProductService {
         this.products.push(product);
 
         this.product$.next(this.products);
+        form.reset()
 
       });
   }
@@ -74,7 +75,7 @@ export class ProductService {
   getSingleData(id: string): Observable<HttpResponse<{}>> {
     return this.http.get(`${this.url}/singledata/${id}`, { observe: 'response' });
   }
-  updateSingleData(title: string, image: File, description: string, id: string, subcategories: any): void {
+  updateSingleData(title: string, image: File, description: string, id: string, subcategories: any, form: any): void {
     const productData = new FormData();
     productData.append("title", title);
     if (image) {
@@ -100,6 +101,7 @@ export class ProductService {
 
         this.product$.next(this.products);
         this.route.navigate(['/product'])
+        form.reset()
 
       });
   }

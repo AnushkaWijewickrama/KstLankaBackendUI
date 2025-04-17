@@ -37,7 +37,7 @@ export class CreateProductComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      image: new FormControl(null, Validators.required),
+      image: new FormControl('/assets/img/imgepre.jpg', Validators.required),
       subcategories: new FormControl(null),
       id: new FormControl(null)
     });
@@ -56,7 +56,7 @@ export class CreateProductComponent implements OnInit {
               this.form.get('description')?.patchValue(x.description)
               this.form.get('image')?.patchValue(x.imagePath)
               this.form.get('id')?.patchValue(x._id)
-              let commonElements = subCategoty.filter((a: any) => x.subcategories.some((b: any) => a._id === b._id));
+              let commonElements = subCategoty?.filter((a: any) => x.subcategories?.some((b: any) => a._id === b._id));
               this.form.get('subcategories')?.patchValue(commonElements)
             });
 
@@ -80,15 +80,12 @@ export class CreateProductComponent implements OnInit {
   }
   onSubmit() {
     if (!this.isedit) {
-      this.poductService.addProduct(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.subcategories);
+      this.poductService.addProduct(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.subcategories, this.form);
       this.form.reset();
-      this.imageData = null;
     }
     else {
-      console.log(this.form.value.model)
-      this.poductService.updateSingleData(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.id, this.form.value.subcategories);
+      this.poductService.updateSingleData(this.form.value.title, this.form.value.image, this.form.value.description, this.form.value.id, this.form.value.subcategories, this.form);
       this.form.reset();
-      this.imageData = null;
     }
 
   }
